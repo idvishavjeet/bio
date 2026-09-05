@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="विश्वजीत चौहान का क्रिएटिव और मज़ेदार पोर्टफोलियो">
+    <meta name="description" content="विश्वजीत चौहान का क्रिएटिव और 3D पोर्टफोलियो">
     <title>विश्वजीत चौहान - Creative & 3D Portfolio</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,6 +22,7 @@
             --primary: #38bdf8;
             --secondary: #818cf8;
             --accent: #c084fc;
+            --error: #ef4444;
             --gradient-text: linear-gradient(135deg, #38bdf8, #c084fc);
             --gradient-bg: linear-gradient(135deg, rgba(56, 189, 248, 0.1), rgba(192, 132, 252, 0.1));
         }
@@ -47,133 +48,135 @@
             display: inline-block;
         }
 
-        /* Running Ticker Tape (Marquee) */
-        .ticker-wrap {
-            width: 100%;
-            overflow: hidden;
-            background: var(--gradient-bg);
-            border-top: 1px solid var(--primary);
-            border-bottom: 1px solid var(--accent);
-            padding: 12px 0;
-            white-space: nowrap;
-            position: relative;
-            z-index: 20;
-        }
-
-        .ticker-text {
-            display: inline-block;
-            animation: scrollTicker 25s linear infinite;
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #e0f2fe;
-        }
-
-        @keyframes scrollTicker {
-            0% { transform: translateX(100vw); }
-            100% { transform: translateX(-100%); }
-        }
-
-        /* Flying UFO Animation */
-        .flying-ufo {
+        /* --------------------------------------
+           🔒 LOCK SCREEN WINDOW 
+           -------------------------------------- */
+        #lock-screen {
             position: fixed;
-            bottom: 20px;
-            font-size: 2.5rem;
-            z-index: 100;
-            pointer-events: none;
-            animation: flyAcross 15s linear infinite;
-            filter: drop-shadow(0 0 10px var(--primary));
-        }
-
-        @keyframes flyAcross {
-            0% { left: -10%; transform: scaleX(1) translateY(0); }
-            25% { transform: scaleX(1) translateY(-30px); }
-            49% { left: 110%; transform: scaleX(1) translateY(0); }
-            50% { left: 110%; transform: scaleX(-1) translateY(0); }
-            75% { transform: scaleX(-1) translateY(-30px); }
-            100% { left: -10%; transform: scaleX(-1) translateY(0); }
-        }
-
-        /* Header / Hero Section */
-        header {
-            min-height: 90vh;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(11, 15, 25, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 9999;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
-            text-align: center;
-            padding: 40px 20px;
+            flex-direction: column;
+            transition: opacity 0.6s ease;
+            overflow: hidden;
+        }
+
+        .lock-card {
+            background: var(--card-bg); border: 1px solid var(--primary); padding: 40px 30px;
+            border-radius: 20px; text-align: center; box-shadow: 0 0 40px rgba(56, 189, 248, 0.2);
+            max-width: 90%; width: 450px; animation: floatLock 3s ease-in-out infinite; z-index: 10;
+        }
+
+        @keyframes floatLock { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+        .lock-card h1 { font-size: 2.2rem; margin: 15px 0; background: var(--gradient-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .lock-card p { color: var(--text-muted); margin-bottom: 25px; font-size: 1.1rem; }
+
+        .input-group { display: flex; flex-direction: column; gap: 15px; }
+        .input-group input { padding: 15px; border-radius: 10px; border: 2px solid var(--card-border); background: rgba(255, 255, 255, 0.05); color: #fff; font-size: 1.2rem; text-align: center; outline: none; transition: 0.3s; letter-spacing: 2px; }
+        .input-group input:focus { border-color: var(--primary); box-shadow: 0 0 15px rgba(56, 189, 248, 0.3); }
+        .input-group button { padding: 15px; border-radius: 10px; border: none; background: var(--gradient-text); color: #fff; font-size: 1.2rem; font-weight: 600; cursor: pointer; transition: 0.3s; box-shadow: 0 5px 15px rgba(192, 132, 252, 0.4); }
+        .input-group button:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(192, 132, 252, 0.6); }
+
+        #error-msg { color: var(--error); margin-top: 15px; font-weight: 600; min-height: 25px; margin-bottom: 0; font-size: 0.95rem; }
+
+        .shake { animation: shakeScreen 0.4s cubic-bezier(.36,.07,.19,.97) both; }
+        @keyframes shakeScreen { 10%, 90% { transform: translate3d(-1px, 0, 0); } 20%, 80% { transform: translate3d(2px, 0, 0); } 30%, 50%, 70% { transform: translate3d(-4px, 0, 0); } 40%, 60% { transform: translate3d(4px, 0, 0); } }
+
+        .lock-ticker { position: absolute; bottom: 20px; width: 100%; overflow: hidden; white-space: nowrap; color: var(--primary); font-size: 1.2rem; font-weight: 600; opacity: 0.8; }
+        .lock-ticker span { display: inline-block; animation: scrollTicker 20s linear infinite; }
+
+        /* --------------------------------------
+           MAIN WEBSITE STYLES
+           -------------------------------------- */
+        #main-website { display: none; opacity: 0; transition: opacity 1s ease; position: relative; }
+
+        /* 💔 TOP SAD TICKER */
+        .top-sad-ticker {
+            width: 100%; overflow: hidden; background: rgba(11, 15, 25, 0.95);
+            border-bottom: 1px solid rgba(239, 68, 68, 0.4); padding: 10px 0;
+            white-space: nowrap; position: absolute; top: 0; left: 0; z-index: 50;
+            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.1);
+        }
+        .top-sad-text { display: inline-block; animation: scrollTopTicker 30s linear infinite; font-size: 1.1rem; color: #fca5a5; font-weight: 500; font-style: italic; letter-spacing: 1px; }
+        @keyframes scrollTopTicker { 0% { transform: translateX(100vw); } 100% { transform: translateX(-100%); } }
+
+        /* HEADER SECTION */
+        header { min-height: 85vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 90px 20px 40px; position: relative; }
+        
+        .profile-img-wrapper { margin-bottom: 25px; cursor: pointer; position: relative; }
+        .profile-photo { width: 170px; height: 170px; border-radius: 50%; object-fit: cover; border: 4px solid var(--primary); box-shadow: 0 0 25px rgba(56, 189, 248, 0.4); animation: profileGlow 4s ease-in-out infinite; transition: all 0.5s ease; }
+        
+        .dizzy-spin { animation: crazySpin 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) !important; }
+        @keyframes crazySpin { 0% { transform: rotate(0deg) scale(1); } 50% { transform: rotate(1080deg) scale(0.5); } 100% { transform: rotate(360deg) scale(1); } }
+        @keyframes profileGlow { 0%, 100% { box-shadow: 0 0 20px rgba(56, 189, 248, 0.3); border-color: var(--primary); } 50% { box-shadow: 0 0 40px rgba(192, 132, 252, 0.6); border-color: var(--accent); } }
+
+        header h1 { font-size: clamp(2.5rem, 5vw, 4.5rem); margin-bottom: 5px; text-shadow: 0 10px 30px rgba(56, 189, 248, 0.3); }
+        
+        /* 💔 SAD LOVE LINE BELOW NAME (Running Animation Fixed) */
+        .sad-love-wrap {
+            width: 100%;
+            max-width: 600px;
+            overflow: hidden;
+            margin: 5px auto 25px;
             position: relative;
+            background: rgba(239, 68, 68, 0.05);
+            border-radius: 20px;
+            padding: 6px 0;
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+        .sad-love-text {
+            display: inline-block;
+            white-space: nowrap;
+            animation: scrollSadLove 22s linear infinite;
+            font-size: 0.95rem;
+            color: #fda4af;
+            font-style: italic;
+            font-weight: 400;
+        }
+        @keyframes scrollSadLove { 
+            0% { transform: translateX(100%); } 
+            100% { transform: translateX(-100%); } 
         }
 
-        /* Profile Photo Styling with Funny Click Effect */
-        .profile-img-wrapper {
-            animation: floatUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-            margin-bottom: 25px;
-            cursor: pointer;
-        }
-
-        .profile-photo {
-            width: 170px;
-            height: 170px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid var(--primary);
-            box-shadow: 0 0 25px rgba(56, 189, 248, 0.4);
-            animation: profileGlow 4s ease-in-out infinite;
-            transition: all 0.5s ease;
-        }
-
-        /* Funny Spin Class applied via JS */
-        .dizzy-spin {
-            animation: crazySpin 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) !important;
-        }
-
-        @keyframes crazySpin {
-            0% { transform: rotate(0deg) scale(1); }
-            50% { transform: rotate(1080deg) scale(0.5); }
-            100% { transform: rotate(360deg) scale(1); }
-        }
-
-        @keyframes profileGlow {
-            0%, 100% { box-shadow: 0 0 20px rgba(56, 189, 248, 0.3); border-color: var(--primary); }
-            50% { box-shadow: 0 0 40px rgba(192, 132, 252, 0.6); border-color: var(--accent); }
-        }
-
-        header h1 { font-size: clamp(2.5rem, 5vw, 4.5rem); margin-bottom: 10px; text-shadow: 0 10px 30px rgba(56, 189, 248, 0.3); }
-        header h2 { font-size: clamp(1.1rem, 2vw, 1.5rem); color: var(--text-muted); margin-bottom: 40px; }
+        header h2 { font-size: clamp(1.1rem, 2vw, 1.5rem); color: var(--text-muted); margin-bottom: 30px; }
 
         .badges { display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; }
-        .badge {
-            background: var(--card-bg); backdrop-filter: blur(12px); padding: 10px 22px; border-radius: 50px;
-            border: 1px solid var(--card-border); display: flex; align-items: center; gap: 10px;
-            transition: transform 0.4s ease, border-color 0.4s ease;
-        }
+        .badge { background: var(--card-bg); backdrop-filter: blur(12px); padding: 10px 22px; border-radius: 50px; border: 1px solid var(--card-border); display: flex; align-items: center; gap: 10px; transition: transform 0.4s ease, border-color 0.4s ease; }
         .badge i { color: var(--primary); }
-        .badge:hover { transform: translateY(-8px) rotate(3deg); border-color: var(--primary); }
+        .badge:hover { transform: translateY(-5px); border-color: var(--primary); }
 
-        /* Container & Cards */
-        .container { max-width: 1250px; margin: 40px auto; padding: 0 20px 100px; }
+        /* Running Ticker Below Header */
+        .ticker-wrap { width: 100%; overflow: hidden; background: var(--gradient-bg); border-top: 1px solid var(--primary); border-bottom: 1px solid var(--accent); padding: 12px 0; white-space: nowrap; position: relative; z-index: 20; }
+        .ticker-text { display: inline-block; animation: scrollTicker 35s linear infinite; font-size: 1.15rem; font-weight: 500; color: #e0f2fe; }
+        @keyframes scrollTicker { 0% { transform: translateX(100vw); } 100% { transform: translateX(-100%); } }
 
-        section {
-            background: var(--card-bg); backdrop-filter: blur(16px); border-radius: 20px; padding: 40px;
-            margin-bottom: 40px; border: 1px solid var(--card-border); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            transition: transform 0.4s ease;
-        }
+        .container { max-width: 1250px; margin: 40px auto; padding: 0 20px 50px; }
+        
+        section { background: var(--card-bg); backdrop-filter: blur(16px); border-radius: 20px; padding: 40px; margin-bottom: 40px; border: 1px solid var(--card-border); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); transition: transform 0.4s ease; }
         section:hover { transform: translateY(-5px); border-color: rgba(255, 255, 255, 0.15); }
 
         .section-title { font-size: 2rem; margin-bottom: 30px; display: flex; align-items: center; gap: 15px; }
-        .icon-box {
-            width: 45px; height: 45px; background: var(--gradient-bg); border-radius: 12px;
-            display: flex; justify-content: center; align-items: center; font-size: 1.3rem; color: var(--primary);
-            border: 1px solid rgba(56, 189, 248, 0.2); animation: bounce 3s infinite;
-        }
+        .icon-box { width: 45px; height: 45px; background: var(--gradient-bg); border-radius: 12px; display: flex; justify-content: center; align-items: center; font-size: 1.3rem; color: var(--primary); border: 1px solid rgba(56, 189, 248, 0.2); }
 
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
+        /* Struggle Ticker in About Section */
+        .struggle-ticker-wrapper {
+            width: 100%; overflow: hidden; background: rgba(239, 68, 68, 0.08); 
+            border: 1px solid rgba(239, 68, 68, 0.2); border-left: 4px solid var(--error);
+            border-radius: 8px; padding: 12px 0; margin-bottom: 25px; box-shadow: inset 0 0 10px rgba(0,0,0,0.2); position: relative;
         }
+        .struggle-ticker-content { display: inline-block; white-space: nowrap; animation: struggleScroll 25s linear infinite; color: #fecaca; font-weight: 500; font-size: 1.1rem; }
+        @keyframes struggleScroll { 0% { transform: translateX(100vw); } 100% { transform: translateX(-100%); } }
 
-        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 35px; }
+        /* Grid Layouts */
+        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 35px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        
         p { color: var(--text-muted); margin-bottom: 20px; font-size: 1.05rem; }
 
         /* Timeline */
@@ -182,155 +185,298 @@
         .timeline-item { position: relative; margin-bottom: 30px; background: rgba(255, 255, 255, 0.02); padding: 20px; border-radius: 12px; border: 1px solid var(--card-border); transition: all 0.3s ease; }
         .timeline-item::before { content: ''; position: absolute; left: -32px; top: 25px; width: 14px; height: 14px; background: var(--bg-color); border: 2px solid var(--primary); border-radius: 50%; }
         .timeline-item:hover { transform: translateX(8px); background: rgba(255, 255, 255, 0.04); }
-        
         .timeline-title { font-size: 1.25rem; font-weight: 600; color: #fff; margin-bottom: 5px; }
         .timeline-subtitle { font-size: 0.9rem; color: var(--primary); margin-bottom: 12px; display: inline-block; background: rgba(56,189,248,0.1); padding: 4px 10px; border-radius: 15px;}
-
-        /* Feature List */
-        .feature-list { list-style: none; }
-        .feature-list li { margin-bottom: 15px; padding-left: 40px; position: relative; color: var(--text-muted); }
-        .feature-list li i { position: absolute; left: 0; top: 2px; width: 28px; height: 28px; background: var(--gradient-bg); border-radius: 50%; display: flex; justify-content: center; align-items: center; color: var(--accent); }
-
-        /* Footer & Funny Button */
-        footer { background: var(--card-bg); backdrop-filter: blur(20px); border-top: 1px solid var(--card-border); text-align: center; padding: 60px 20px; overflow: hidden; position: relative; }
         
+        /* Middle Class Shayari Boxes */
+        .shayari-box { background: rgba(255, 255, 255, 0.03); border-top: 4px solid var(--accent); border-radius: 10px; padding: 30px 20px 20px; position: relative; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.2); transition: 0.3s; }
+        .shayari-box:hover { background: rgba(255, 255, 255, 0.06); transform: translateY(-5px); border-color: var(--primary); }
+        .shayari-box i { position: absolute; top: -20px; left: 50%; transform: translateX(-50%); background: var(--bg-color); border: 2px solid var(--accent); color: var(--primary); width: 40px; height: 40px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1.2rem; }
+        .shayari-title { font-size: 1.1rem; color: var(--primary); margin-bottom: 10px; font-weight: 600; }
+        .shayari-text { color: #fff; font-size: 1rem; font-style: italic; line-height: 1.8; }
+
+        footer { background: var(--card-bg); backdrop-filter: blur(20px); border-top: 1px solid var(--card-border); text-align: center; padding: 60px 20px; overflow: hidden; position: relative; }
         .contact-links { display: flex; justify-content: center; gap: 20px; margin-top: 30px; flex-wrap: wrap; position: relative; z-index: 10; }
         .contact-links a { color: var(--text-main); text-decoration: none; background: rgba(255,255,255,0.03); padding: 14px 30px; border-radius: 10px; font-weight: 500; display: flex; align-items: center; gap: 10px; border: 1px solid var(--card-border); transition: all 0.3s ease; }
         .contact-links a:hover { background: var(--primary); color: #000; transform: translateY(-3px); }
 
-        /* The Runaway Button */
-        .runaway-btn {
-            background: var(--gradient-text);
-            color: #fff;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 25px;
-            font-weight: 600;
-            font-size: 1rem;
-            cursor: pointer;
-            position: relative;
-            transition: 0.2s ease;
-            box-shadow: 0 5px 15px rgba(192, 132, 252, 0.4);
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            margin-top: 20px;
+        .runaway-btn { background: var(--gradient-text); color: #fff; border: none; padding: 12px 25px; border-radius: 25px; font-weight: 600; font-size: 1rem; cursor: pointer; position: relative; transition: 0.2s ease; box-shadow: 0 5px 15px rgba(192, 132, 252, 0.4); display: inline-flex; align-items: center; gap: 10px; margin-top: 20px; z-index: 50; }
+
+        /* Floating Audio Control Widget */
+        .music-toggle {
+            position: fixed; bottom: 20px; right: 20px; background: var(--card-bg);
+            border: 1px solid var(--primary); color: #fff; padding: 10px 15px; border-radius: 30px;
+            cursor: pointer; z-index: 1000; display: flex; align-items: center; gap: 8px; font-size: 0.9rem;
+            backdrop-filter: blur(10px); box-shadow: 0 5px 20px rgba(56, 189, 248, 0.3); transition: 0.3s;
         }
+        .music-toggle:hover { background: var(--primary); color: #000; }
 
-        /* Animations */
-        @keyframes floatUp { 0% { opacity: 0; transform: translateY(30px); } 100% { opacity: 1; transform: translateY(0); } }
-
+        /* Responsive Settings */
+        @media (max-width: 992px) {
+            .grid-2, .grid-3 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+        }
         @media (max-width: 768px) {
-            .grid-2 { grid-template-columns: 1fr; }
-            header { min-height: auto; padding: 100px 20px 60px; }
+            .grid-2, .grid-3 { grid-template-columns: 1fr; }
+            header { min-height: auto; padding: 90px 20px 50px; }
             .profile-photo { width: 140px; height: 140px; }
+            .lock-card { padding: 30px 20px; }
+            .section-title { font-size: 1.5rem; }
         }
     </style>
 </head>
 <body>
 
-    <div class="flying-ufo">🛸 💨</div>
+    <audio id="bgMusic" loop>
+        <source src="https://cdn.pixabay.com/download/audio/2022/05/16/audio_03d922a84a.mp3?filename=sad-piano-ambient-111394.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
 
-    <header>
-        <div class="profile-img-wrapper" onclick="makeDizzy(this)" title="मुझे क्लिक करके देखो! 😜">
-            <img src="https://m.media-amazon.com/images/S/amzn-author-media-prod/brtd2h41uj2lbprubck5lc1c4c._SY450_CR0%2C0%2C450%2C450_.jpg" alt="विश्वजीत चौहान" class="profile-photo">
+    <button id="musicBtn" class="music-toggle" style="display: none;" onclick="toggleMusic()">
+        <i class="fas fa-volume-mute" id="musicIcon"></i> <span id="musicText">म्यूज़िक बंद है</span>
+    </button>
+
+    <div id="lock-screen">
+        <div class="lock-card">
+            <h2>अरे रुको! ✋</h2>
+            <h1>विश्वजीत चौहान</h1>
+            <p>पोर्टफोलियो देखने के लिए सीक्रेट पासवर्ड डालें।</p>
+            
+            <div class="input-group">
+                <input type="password" id="passInput" placeholder="पासवर्ड (Password)..." onkeypress="handleEnter(event)">
+                <button onclick="checkPassword()">Unlock 🔓</button>
+            </div>
+            
+            <p id="error-msg"></p>
         </div>
 
-        <h1 class="gradient-text">विश्वजीत चौहान</h1>
-        <h2>बहुआयामी पेशेवर: रिलेशनशिप मैनेजर, डिस्ट्रिक्ट एडिटर और टेक उत्साही</h2>
-        
-        <div class="badges">
-            <div class="badge"><i class="fas fa-handshake"></i> Relationship Manager</div>
-            <div class="badge"><i class="fas fa-newspaper"></i> District Editor</div>
-            <div class="badge"><i class="fab fa-google-play"></i> App Publisher</div>
-            <div class="badge"><i class="fas fa-scale-balanced"></i> Law Aspirant</div>
-        </div>
-    </header>
-
-    <div class="ticker-wrap">
-        <div class="ticker-text">
-            🚀 ब्रेकिंग न्यूज़: अभी भी अपनी ज़िंदगी डीबग (Debug) कर रहा हूँ... &nbsp; | &nbsp; ☕ 99% चाय और 1% कोड पर चल रहा हूँ... &nbsp; | &nbsp; 📚 CAT/LLB की तैयारी जारी है, कृपया डिस्टर्ब न करें! 😅 &nbsp; | &nbsp; 💡 नया ऐप प्ले स्टोर पर जल्द आ रहा है... &nbsp; | &nbsp; 🛸 एलियंस को भी मेरा कोड समझ नहीं आया! 
-        </div>
-    </div>
-
-    <div class="container">
-        <section>
-            <h2 class="section-title">
-                <div class="icon-box"><i class="fas fa-user-astronaut"></i></div>
-                मेरे बारे में (थोड़ा सीरियस)
-            </h2>
-            <p>मैं एक बहुआयामी और महत्वाकांक्षी पेशेवर हूँ, जिसके पास सेल्स, मीडिया, तकनीकी विकास और क्वालिटी ऑपरेशंस का एक अनूठा अनुभव है। मैं <strong>तथ्यधर्मी भारत (न्यूज़ एवं मीडिया)</strong> में फरीदाबाद (हरियाणा) के डिस्ट्रिक्ट एडिटर के रूप में कार्यरत हूँ, जहाँ मैं निष्पक्ष पत्रकारिता का नेतृत्व करता हूँ। साथ ही, <strong>IndianMoney.com</strong> में रिलेशनशिप मैनेजर के तौर पर, मैं कॉर्पोरेट फाइनेंस और ग्राहक प्रबंधन में अपनी विशेषज्ञता प्रदर्शित कर रहा हूँ।</p>
-            <p>तकनीक के प्रति अपने जुनून के चलते, मैं <strong>Google Play Store पर ऐप्स पब्लिश और डेवलप</strong> करता हूँ। इसके अतिरिक्त, मैं भविष्य में नेतृत्व करने के उद्देश्य से <strong>CAT, CUET PG, और LLB</strong> जैसी प्रतिष्ठित प्रवेश परीक्षाओं की तैयारी कर रहा हूँ।</p>
-        </section>
-
-        <div class="grid-2">
-            <section>
-                <h2 class="section-title">
-                    <div class="icon-box"><i class="fas fa-briefcase"></i></div>
-                    प्रोफेशनल अनुभव
-                </h2>
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-title">IndianMoney.com</div>
-                        <div class="timeline-subtitle">Relationship Manager | Sales Team</div>
-                        <p><strong>ज्वाइनिंग:</strong> 23 फरवरी 2022<br>
-                        क्लाइंट रिलेशनशिप मैनेजमेंट, सेल्स रणनीतियों का विकास और व्यावसायिक लक्ष्यों (Acquisition Goals) की प्राप्ति।</p>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-title">तथ्यधर्मी भारत (न्यूज़ & मीडिया)</div>
-                        <div class="timeline-subtitle">District Editor & Correspondent</div>
-                        <p><strong>स्थान:</strong> फरीदाबाद, हरियाणा | <strong>आईडी:</strong> TDB-15<br>
-                        क्षेत्रीय समाचारों का संपादन, मीडिया रिपोर्टिंग, और निष्पक्ष सत्य को जनता के सामने लाने का नेतृत्व।</p>
-                    </div>
-                </div>
-            </section>
-
-            <section>
-                <h2 class="section-title">
-                    <div class="icon-box"><i class="fas fa-microchip"></i></div>
-                    ऑपरेशंस एवं क्वालिटी
-                </h2>
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-title">एल्पाइन शूज प्राइवेट लिमिटेड</div>
-                        <div class="timeline-subtitle">क्वालिटी एनालिस्ट</div>
-                        <p>प्रोडक्ट इंस्पेक्शन, डिफेक्ट आइडेंटिफिकेशन (दोष पहचान) और कंपनी के कड़े गुणवत्ता मानकों का पालन सुनिश्चित करना।</p>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-title">कोल्विन मैनेजमेंट सॉल्यूशंस</div>
-                        <div class="timeline-subtitle">टेक्निकल ऑपरेशंस</div>
-                        <p>कंप्यूटर-आधारित स्कैनिंग, डेटा एंट्री ऑपरेशंस, लेबलिंग, और पैकेजिंग प्रक्रियाओं का तकनीकी प्रबंधन।</p>
-                    </div>
-                </div>
-            </section>
+        <div class="lock-ticker">
+            <span>🚨 <b>चेतावनी:</b> बिना पासवर्ड के एंट्री मना है! 🤫 &nbsp; | &nbsp; CIA और FBI को भी यह पासवर्ड नहीं पता... 🕵️‍♂️ &nbsp; | &nbsp; पासवर्ड भूल गए? बादाम खाया करो! 🧠 &nbsp; | &nbsp; हैक करने की कोशिश न करें, मेरा एंटीवायरस बहुत खूंखार है! 🐕 🚨</span>
         </div>
     </div>
 
-    <footer>
-        <h2 class="gradient-text" style="font-size: 2.2rem; margin-bottom: 15px;">संपर्क करें</h2>
-        <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto;">
-            सेल्स, मीडिया, तकनीकी विकास या किसी भी व्यावसायिक अवसर के लिए बेझिझक संपर्क करें।
-        </p>
+    <div id="main-website">
         
-        <div class="contact-links">
-            <a href="mailto:id.vishavjeet.singh@outlook.com"><i class="fas fa-envelope"></i> ईमेल भेजें</a>
-            <a href="tel:+919759284634"><i class="fas fa-phone-alt"></i> कॉल करें</a>
+        <div class="top-sad-ticker">
+            <div class="top-sad-text">
+                🥀 "मेरा सफर अब तन्हा ही सही, पर जारी है... मुझे अब किसी के झूठे साथ की दरकार नहीं। तुम बस दूर से तमाशा देखना, मैं अपनी मंज़िलों का रास्ता खुद ही तराशूँगा।" 💔 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 🥀 "मेरा सफर अब तन्हा ही सही, पर जारी है... मुझे अब किसी के झूठे साथ की दरकार नहीं। तुम बस दूर से तमाशा देखना, मैं अपनी मंज़िलों का रास्ता खुद ही तराशूँगा।" 💔
+            </div>
         </div>
 
-        <br><br>
-        <p style="font-size: 0.9rem; color: var(--accent);">बोरा गए हैं? इस बटन पर क्लिक करके दिखाएं 👇</p>
-        <button class="runaway-btn" onmouseover="runAway(this)" onclick="alert('अरे वाह! आपने मुझे पकड़ लिया! 🎉')">
-            मुझे पकड़ कर दिखाओ! 🏃‍♂️
-        </button>
-    </footer>
+        <header>
+            <div class="profile-img-wrapper" onclick="makeDizzy(this)" title="क्लिक करके घुमाएं! 😜">
+                <img src="https://m.media-amazon.com/images/S/amzn-author-media-prod/brtd2h41uj2lbprubck5lc1c4c._SY450_CR0%2C0%2C450%2C450_.jpg" alt="विश्वजीत चौहान" class="profile-photo">
+            </div>
+
+            <h1 class="gradient-text">विश्वजीत चौहान</h1>
+            
+            <div class="sad-love-wrap">
+                <div class="sad-love-text">
+                    "मोहब्बत में हार कर भी सफर जारी है... किसी के जाने से ज़िंदगी खत्म नहीं होती 💔 &nbsp;&nbsp;|&nbsp;&nbsp; कभी-कभी किसी के बिना जीना भी एक कला है, जिसे मैं अब सीख रहा हूँ... 🥀 &nbsp;&nbsp;|&nbsp;&nbsp; दिल टूटा है, हौसला नहीं! ✨"
+                </div>
+            </div>
+
+            <h2>बहुआयामी पेशेवर: रिलेशनशिप मैनेजर, डिस्ट्रिक्ट एडिटर और टेक उत्साही</h2>
+            
+            <div class="badges">
+                <div class="badge"><i class="fas fa-handshake"></i> Relationship Manager</div>
+                <div class="badge"><i class="fas fa-newspaper"></i> District Editor</div>
+                <div class="badge"><i class="fab fa-google-play"></i> App Publisher</div>
+                <div class="badge"><i class="fas fa-scale-balanced"></i> Law & Mgmt Aspirant</div>
+            </div>
+        </header>
+
+        <div class="ticker-wrap">
+            <div class="ticker-text">
+                🚶‍♂️ <b>मिडिल क्लास स्ट्रगल:</b> आधी उम्र 'पैसे कैसे बचाएं' सोचने में निकल गई, और बाकी आधी 'पैसे कैसे कमाएं' सोचने में... 🥲 &nbsp; | &nbsp; 💸 सपने थे वर्ल्ड टूर के, अब गूगल मैप्स (Google Maps) पर पेरिस देख कर ही खुश हो लेता हूँ! 🌍 &nbsp; | &nbsp; 👔 रात को मोटिवेशनल वीडियो देखकर करोड़पति बनने की सोचता हूँ, सुबह उठकर फिर वही बस का धक्का खाता हूँ... 🚌😂 &nbsp; | &nbsp; 💼 लोग संघर्ष करके स्टार बनते हैं, हम संघर्ष करके सिर्फ 'थक' जाते हैं! 🛌
+            </div>
+        </div>
+
+        <div class="container">
+            <section>
+                <h2 class="section-title">
+                    <div class="icon-box"><i class="fas fa-user-astronaut"></i></div>
+                    मेरे बारे में (एक कड़वा सच और मेरी ज़िद)
+                </h2>
+
+                <div class="struggle-ticker-wrapper">
+                    <div class="struggle-ticker-content">
+                        🚶‍♂️ खाली जेब ने अपनों की असली पहचान करा दी 💔 &nbsp; | &nbsp; 🎧 तानों को अब मैंने अपना मोटिवेशन बना लिया है 🔥 &nbsp; | &nbsp; 💼 जो आज मुँह फेरते हैं, कल मिलने का वक्त मांगेंगे ⏳ &nbsp; | &nbsp; 💪 मेहनत खामोशी से, सफलता शोर मचाएगी 🚀 &nbsp; | &nbsp; 🧩 बिखरा ज़रूर हूँ, पर हारा नहीं हूँ 💯
+                    </div>
+                </div>
+
+                <p>एक मिडिल क्लास लड़के की ज़िंदगी का सबसे कड़वा सच यही है कि अगर जेब में पैसा न हो, तो अपने ही घर में सम्मान नहीं मिलता। समाज आपकी अहमियत आपकी हैसियत से तय करता है। आप कितनी भी पढ़ाई कर लें, लेकिन अगर एक 'अच्छी नौकरी' का ठप्पा न लगे, तो दुनिया आपको नाकामयाब ही मानती है। संघर्ष के दिनों में इंसान अपनों और रिश्तेदारों से सहारे की आस लगाता है, लेकिन हकीकत में उस अँधेरे सफर में कोई साथ नहीं देता। मेरे साथ भी बिल्कुल ऐसा ही हुआ। एक वक्त था जब आँखों में बड़े सपने थे, बहुत कुछ कर गुज़रने की चाह थी, लेकिन हालातों और अपनों की बेरुखी ने कई बार ऐसा महसूस कराया मानो अब कुछ नहीं हो पाएगा। दिल टूटा, हिम्मत भी बिखरी, लेकिन मेरे अंदर की उम्मीद अभी भी ज़िंदा है। जिन लोगों ने मेरे बुरे वक्त में मुझे ठुकराया, जिन्होंने मेरा मज़ाक उड़ाया और मुझे सम्मान नहीं दिया, उन सबका हिसाब होगा।</p>
+                <p>यह मेरा संघर्ष है, और मैं अपनी ज़िंदगी में इतना कुछ हासिल करूँगा कि जो लोग आज मुँह फेर लेते हैं, वो कल मुझे देखने के लिए तरसेंगे। आज मेरा यही जुनून मेरी ताकत है। मैं <strong>तथ्यधर्मी भारत</strong> में डिस्ट्रिक्ट एडिटर हूँ, <strong>IndianMoney.com</strong> में रिलेशनशिप मैनेजर हूँ, और <strong>Google Play Store पर ऐप्स पब्लिश</strong> करता हूँ। इसके साथ ही मैं <strong>CAT, CUET PG, और LLB</strong> की तैयारी कर रहा हूँ। मेरा सफर अभी खत्म नहीं हुआ है!</p>
+            </section>
+
+            <div class="grid-2">
+                <section>
+                    <h2 class="section-title">
+                        <div class="icon-box"><i class="fas fa-briefcase"></i></div>
+                        प्रोफेशनल अनुभव
+                    </h2>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-title">IndianMoney.com</div>
+                            <div class="timeline-subtitle">Relationship Manager | Sales Team</div>
+                            <p><strong>ज्वाइनिंग:</strong> 23 फरवरी 2022<br>
+                            क्लाइंट रिलेशनशिप मैनेजमेंट, सेल्स रणनीतियों का विकास और व्यावसायिक लक्ष्यों (Acquisition Goals) की प्राप्ति।</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-title">तथ्यधर्मी भारत (न्यूज़ & मीडिया)</div>
+                            <div class="timeline-subtitle">District Editor & Correspondent</div>
+                            <p><strong>स्थान:</strong> फरीदाबाद, हरियाणा | <strong>आईडी:</strong> TDB-15<br>
+                            क्षेत्रीय समाचारों का संपादन, मीडिया रिपोर्टिंग, और निष्पक्ष सत्य को जनता के सामने लाने का नेतृत्व।</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h2 class="section-title">
+                        <div class="icon-box"><i class="fas fa-microchip"></i></div>
+                        ऑपरेशंस एवं क्वालिटी
+                    </h2>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-title">एल्पाइन शूज प्राइवेट लिमिटेड</div>
+                            <div class="timeline-subtitle">क्वालिटी एनालिस्ट</div>
+                            <p>प्रोडक्ट इंस्पेक्शन, डिफेक्ट आइडेंटिफिकेशन (दोष पहचान) और कंपनी के कड़े गुणवत्ता मानकों का पालन सुनिश्चित करना।</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-title">कोल्विन मैनेजमेंट सॉल्यूशंस</div>
+                            <div class="timeline-subtitle">टेक्निकल ऑपरेशंस</div>
+                            <p>कंप्यूटर-आधारित स्कैनिंग, डेटा एंट्री ऑपरेशंस, लेबलिंग, और पैकेजिंग प्रक्रियाओं का तकनीकी प्रबंधन।</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <section>
+                <h2 class="section-title">
+                    <div class="icon-box"><i class="fas fa-wallet"></i></div>
+                    मिडिल क्लास डायरी (दर्द-ए-दिल)
+                </h2>
+                <div class="grid-3">
+                    <div class="shayari-box">
+                        <i class="fas fa-money-bill-wave"></i>
+                        <div class="shayari-title">सैलरी का दुखड़ा</div>
+                        <div class="shayari-text">"सैलरी आती कछुए की चाल से है,<br>और जाती चीते की रफ्तार से है!<br>EMI भरते-भरते जवानी बीत गई...<br>और एकाउंट में बैलेंस सिर्फ यादों सा रह गया।" 🐢🐆</div>
+                    </div>
+                    <div class="shayari-box">
+                        <i class="fas fa-motorcycle"></i>
+                        <div class="shayari-title">ख्वाब और हकीकत</div>
+                        <div class="shayari-text">"सोचा था मर्सिडीज में घूमूंगा,<br>अब बाइक में 50 रुपये का पेट्रोल डलवाते हुए भी...<br>पेट्रोल पंप वाले को और मीटर को शक की निगाह से देखता हूँ।" 🏍️💸</div>
+                    </div>
+                    <div class="shayari-box">
+                        <i class="fas fa-user-graduate"></i>
+                        <div class="shayari-title">शर्मा जी का लड़का</div>
+                        <div class="shayari-text">"शर्मा जी के बेटे का पैकेज सुनकर,<br>घरवाले मुझे ऐसे घूरते हैं,<br>जैसे मैंने ही देश का खजाना लूटा हो!<br>और मेरी किताबें मुझे देखकर हँसती हैं।" 🕵️‍♂️😂</div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <footer>
+            <h2 class="gradient-text" style="font-size: 2.2rem; margin-bottom: 15px;">संपर्क करें</h2>
+            <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto;">
+                सेल्स, मीडिया, तकनीकी विकास या किसी भी व्यावसायिक अवसर के लिए बेझिझक संपर्क करें।
+            </p>
+            
+            <div class="contact-links">
+                <a href="mailto:id.vishavjeet.singh@outlook.com"><i class="fas fa-envelope"></i> ईमेल भेजें</a>
+                <a href="tel:+919759284634"><i class="fas fa-phone-alt"></i> कॉल करें</a>
+            </div>
+
+            <br><br>
+            <p style="font-size: 0.9rem; color: var(--accent); margin-top: 20px;">वेबसाइट देखकर थक गए? इस बटन पर क्लिक करके दिखाएं 👇</p>
+            <button class="runaway-btn" onmouseover="runAway(this)" onclick="alert('अरे वाह! आपने मुझे पकड़ लिया! आप तो हैकर निकले! 🎉')">
+                मुझे पकड़ कर दिखाओ! 🏃‍♂️💨
+            </button>
+        </footer>
+    </div>
 
     <script>
+        let isMusicPlaying = false;
+
+        // --- Password & Audio Logic ---
+        function checkPassword() {
+            const passInput = document.getElementById("passInput").value;
+            const errorMsg = document.getElementById("error-msg");
+            const lockCard = document.querySelector(".lock-card");
+            
+            if (passInput === "976") {
+                const lockScreen = document.getElementById("lock-screen");
+                const mainWebsite = document.getElementById("main-website");
+                const bgMusic = document.getElementById("bgMusic");
+                const musicBtn = document.getElementById("musicBtn");
+                const musicIcon = document.getElementById("musicIcon");
+                const musicText = document.getElementById("musicText");
+                
+                // Play Background Music
+                bgMusic.volume = 0.4;
+                bgMusic.play().then(() => {
+                    isMusicPlaying = true;
+                    musicBtn.style.display = "flex";
+                    musicIcon.className = "fas fa-volume-up";
+                    musicText.innerText = "म्यूज़िक चालू है 🎶";
+                }).catch(error => {
+                    console.log("Audio autoplay blocked:", error);
+                    musicBtn.style.display = "flex"; // Show button even if blocked so user can click
+                });
+                
+                lockScreen.style.opacity = '0';
+                setTimeout(() => {
+                    lockScreen.style.display = 'none';
+                    mainWebsite.style.display = 'block';
+                    setTimeout(() => {
+                        mainWebsite.style.opacity = '1';
+                    }, 50);
+                }, 600);
+            } else {
+                const messages = [
+                    "गलत पासवर्ड! जासूस हो क्या? 🕵️‍♂️",
+                    "दिमाग लगाओ, पासवर्ड कोई रॉकेट साइंस नहीं है! 🚀",
+                    "क्या बात है, भूल गए? बादाम खाना शुरू करो! 🧠",
+                    "ना भाई, गलत चाबी लगा रहे हो! 🗝️❌"
+                ];
+                
+                errorMsg.innerText = messages[Math.floor(Math.random() * messages.length)];
+                
+                lockCard.classList.remove("shake");
+                void lockCard.offsetWidth; // Trigger reflow
+                lockCard.classList.add("shake");
+                document.getElementById("passInput").value = "";
+            }
+        }
+
+        // Toggle Music Manually via Floating Button
+        function toggleMusic() {
+            const bgMusic = document.getElementById("bgMusic");
+            const musicIcon = document.getElementById("musicIcon");
+            const musicText = document.getElementById("musicText");
+
+            if (isMusicPlaying) {
+                bgMusic.pause();
+                isMusicPlaying = false;
+                musicIcon.className = "fas fa-volume-mute";
+                musicText.innerText = "म्यूज़िक बंद है";
+            } else {
+                bgMusic.play();
+                isMusicPlaying = true;
+                musicIcon.className = "fas fa-volume-up";
+                musicText.innerText = "म्यूज़िक चालू है 🎶";
+            }
+        }
+
+        function handleEnter(event) {
+            if (event.key === "Enter") {
+                checkPassword();
+            }
+        }
+
         // 1. Funny Spin Effect for Profile Picture
         function makeDizzy(element) {
             let img = element.querySelector('img');
             img.classList.add('dizzy-spin');
-            
-            // Remove class after animation ends so it can be triggered again
             setTimeout(() => {
                 img.classList.remove('dizzy-spin');
             }, 1000);
@@ -338,10 +484,8 @@
 
         // 2. Runaway Button Effect
         function runAway(btn) {
-            // Get random X and Y translations
-            const x = Math.random() * 200 - 100; // moves between -100px and 100px
-            const y = Math.random() * 100 - 50;  // moves between -50px and 50px
-            
+            const x = Math.random() * 300 - 150; 
+            const y = Math.random() * 150 - 75;  
             btn.style.transform = `translate(${x}px, ${y}px)`;
         }
     </script>
