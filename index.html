@@ -35,13 +35,12 @@
             position: relative;
         }
 
-        /* LIGHTER FONT SIZE & CYBER GRID BACKGROUND */
         body {
             font-family: 'Inter', 'Noto Sans Devnagari', sans-serif;
             background-color: var(--bg-deep);
             color: var(--text-main);
             line-height: 1.6;
-            font-size: 0.92rem; /* Reduced font size for cleaner look */
+            font-size: 0.92rem;
             background-image: 
                 linear-gradient(rgba(56, 189, 248, 0.03) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(56, 189, 248, 0.03) 1px, transparent 1px),
@@ -51,7 +50,6 @@
             background-attachment: fixed;
         }
 
-        /* QUANTUM CANVAS */
         #quantumCanvas {
             position: fixed;
             top: 0; left: 0;
@@ -60,7 +58,6 @@
             pointer-events: none;
         }
 
-        /* HEADER */
         header { width: 100%; min-height: 85vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 60px 20px 40px; }
         
         .hero-reveal { opacity: 0; transform: translateY(30px); animation: cinematicReveal 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; width: 100%; }
@@ -70,17 +67,14 @@
         .hero-reveal.delay-4 { animation-delay: 0.7s; }
         @keyframes cinematicReveal { to { opacity: 1; transform: translateY(0); } }
 
-        /* ✨ FUTURISTIC AVATAR HUD ✨ */
         .profile-img-wrapper { position: relative; width: 260px; height: 260px; margin: 0 auto 35px; display: flex; justify-content: center; align-items: center; cursor: pointer; }
         
-        /* Cyber Targeting Brackets */
         .cyber-bracket { position: absolute; width: 25px; height: 25px; border-color: var(--primary); border-style: solid; z-index: 6; pointer-events: none; opacity: 0.7; }
         .top-left { top: 10px; left: 10px; border-width: 2px 0 0 2px; }
         .top-right { top: 10px; right: 10px; border-width: 2px 2px 0 0; }
         .bottom-left { bottom: 10px; left: 10px; border-width: 0 0 2px 2px; }
         .bottom-right { bottom: 10px; right: 10px; border-width: 0 2px 2px 0; }
 
-        /* Gyroscopic Rings */
         .neon-ring { position: absolute; border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%, -50%); pointer-events: none; }
         .ring-hud { width: 260px; height: 260px; border: 1px dotted rgba(192, 132, 252, 0.5); animation: spinRing 25s linear infinite; }
         .ring-1 { width: 240px; height: 240px; border: 2px dashed rgba(56, 189, 248, 0.6); animation: spinRingReverse 15s linear infinite; }
@@ -91,12 +85,10 @@
         @keyframes spinRingReverse { 100% { transform: translate(-50%, -50%) rotate(-360deg); } }
         @keyframes pulseNeon { 0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(0.95); } 50% { opacity: 1; transform: translate(-50%, -50%) scale(1.05); } }
 
-        /* Holographic Scanner Container */
         .profile-photo-container { position: relative; width: 180px; height: 180px; border-radius: 50%; overflow: hidden; z-index: 5; border: 3px solid rgba(255,255,255,0.1); box-shadow: 0 0 30px rgba(56, 189, 248, 0.5); }
         .profile-photo { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
         .profile-img-wrapper:hover .profile-photo { transform: scale(1.05); }
         
-        /* Laser Scanner Beam */
         .holo-scanner { position: absolute; top: -10%; left: 0; width: 100%; height: 2px; background: rgba(56, 189, 248, 0.9); box-shadow: 0 0 15px 5px rgba(56, 189, 248, 0.5); animation: scan 3s ease-in-out infinite; z-index: 10; pointer-events: none; }
         @keyframes scan { 0% { top: -10%; opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { top: 110%; opacity: 0; } }
 
@@ -115,7 +107,6 @@
         .action-card-btn.google i { color: #38bdf8; font-size: 1.1rem; }
         .action-card-btn:hover { color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.5); }
 
-        /* HERO CTA BUTTONS */
         .hero-cta-buttons { display: flex; justify-content: space-between; gap: 8px; flex-wrap: nowrap; margin-top: 15px; width: 100%; max-width: 600px; margin-left: auto; margin-right: auto; }
         .hero-btn { position: relative; overflow: hidden; background: transparent; border: none; padding: 12px 10px; border-radius: 25px; color: #fff; font-weight: 500; font-size: 0.9rem; display: flex; align-items: center; justify-content: center; gap: 5px; transition: all 0.3s ease; cursor: pointer; flex: 1; z-index: 1; white-space: nowrap; }
         .btn-grad-1::before { background: conic-gradient(from 0deg, transparent 70%, #ec4899 85%, #f43f5e 100%); }
@@ -127,7 +118,6 @@
         .hero-btn:hover::after { background: rgba(20, 29, 49, 0.95); }
         .hero-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(56, 189, 248, 0.25); }
 
-        /* UNIVERSAL BORDER */
         .animated-border-box { position: relative; z-index: 1; background: transparent !important; border: none !important; }
         .border-spinner { position: absolute; inset: 0; border-radius: inherit; overflow: hidden; z-index: -2; pointer-events: none; }
         .spin-cyan-purple::before { background: conic-gradient(from 0deg, transparent 65%, #38bdf8 85%, #c084fc 100%); }
@@ -141,7 +131,6 @@
         .animated-border-box.hover-effect:hover::after { background: var(--bg-card-hover); }
         @keyframes rotateBg { 0% { transform: translate(-50%, -50%) rotate(0deg); } 100% { transform: translate(-50%, -50%) rotate(360deg); } }
 
-        /* MODALS */
         #generic-popup-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(5, 7, 14, 0.85); backdrop-filter: blur(8px); z-index: 10001; display: flex; justify-content: center; align-items: center; padding: 20px; opacity: 0; visibility: hidden; transition: all 0.3s ease; }
         #generic-popup-modal.show { opacity: 1; visibility: visible; }
         .popup-modal-content { background: var(--bg-card); border: 1px solid var(--accent); padding: 30px; border-radius: 16px; max-width: 500px; width: 100%; text-align: left; box-shadow: 0 15px 40px rgba(0,0,0,0.8), 0 0 25px rgba(192,132,252,0.2); transform: scale(0.9); transition: transform 0.3s ease; max-height: 85vh; overflow-y: auto; }
@@ -149,10 +138,8 @@
         .popup-modal-content h3 { font-family: 'Poppins', sans-serif; font-size: 1.3rem; margin-bottom: 15px; background: var(--gradient-main); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-align: center; }
         .popup-modal-content p { font-size: 0.92rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 15px; text-align: justify; }
 
-        /* CONTAINER */
         .container { width: 100%; max-width: 1000px; margin: 0 auto; padding: 10px 20px 60px; }
 
-        /* TIMER */
         .life-timer-card { padding: 20px; margin-bottom: 25px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.3); border-radius: 16px; }
         .life-timer-title { font-family: 'Poppins', sans-serif; font-size: 1.15rem; font-weight: 600; margin-bottom: 5px; background: var(--gradient-main); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: flex; align-items: center; justify-content: center; gap: 8px; }
         .timer-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; margin-top: 10px; }
@@ -166,7 +153,6 @@
         .depart-content.show { max-height: 800px; padding-top: 12px; }
         .depart-content p { font-size: 0.88rem; color: #cbd5e1; line-height: 1.6; margin-bottom: 10px; font-style: italic; border-left: 3px solid #f87171; padding-left: 10px; }
 
-        /* STATS & ACCORDIONS */
         .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 15px; margin-bottom: 35px; justify-content: center; }
         .stat-card { padding: 20px; display: flex; align-items: center; gap: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.25); transition: 0.3s; border-radius: 16px; cursor: pointer;}
         .stat-card:hover { transform: translateY(-3px); }
@@ -195,7 +181,6 @@
         .struggle-content { display: inline-block; animation: struggleScroll 30s linear infinite; color: #fecaca; font-weight: 400; font-size: 0.9rem; }
         @keyframes struggleScroll { 0% { transform: translateX(100vw); } 100% { transform: translateX(-100%); } }
 
-        /* SKILLS & TIMELINES */
         .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 15px; margin-top: 10px; }
         .skill-card { background: rgba(15, 23, 42, 0.4); border: 1px solid var(--border-glass); border-radius: 12px; padding: 18px; transition: all 0.3s ease; }
         .skill-card:hover { transform: translateY(-3px); border-color: var(--accent); background: rgba(192, 132, 252, 0.05); }
@@ -212,19 +197,17 @@
         .milestone-title { font-size: 1.05rem; font-weight: 600; color: var(--text-main); margin-bottom: 4px; }
         .milestone-subtitle { font-size: 0.9rem; color: var(--primary); font-weight: 500; margin-bottom: 10px; }
 
-        /* 🔄 AUTO-ADJUSTABLE THOUGHTS CAROUSEL (DIARY) */
         .thoughts-carousel-section { margin-top: 40px; margin-bottom: 40px; }
         .section-header-title { font-family:'Poppins', sans-serif; font-size: 1.4rem; font-weight: 600; margin-bottom: 20px; color: var(--text-main); }
         
-        /* Container has no fixed height, adjusts to active slide */
         .thoughts-carousel-container { position: relative; width: 100%; border-radius: 16px; margin-bottom: 15px; }
         
         .thought-card-slide {
-            display: none; /* Hidden by default */
+            display: none;
             padding: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); border-radius: 16px; 
             animation: fadeSlideUp 0.6s ease forwards;
         }
-        .thought-card-slide.active { display: block; } /* Shows only active card naturally */
+        .thought-card-slide.active { display: block; }
         
         @keyframes fadeSlideUp {
             0% { opacity: 0; transform: translateY(15px); }
@@ -242,12 +225,10 @@
         .carousel-arrow-btn:hover { background: rgba(56,189,248,0.15); border-color: var(--primary); color: #fff; }
         .carousel-indicator { font-size: 0.85rem; font-weight: 500; color: var(--text-muted); }
 
-        /* TOAST */
         #custom-toast { position: fixed; top: 25px; left: 50%; transform: translateX(-50%) translateY(-25px); background: rgba(17, 24, 39, 0.95); border: 1px solid var(--primary); color: #fff; padding: 12px 20px; border-radius: 12px; font-size: 0.9rem; font-weight: 500; box-shadow: 0 10px 30px rgba(56, 189, 248, 0.25); opacity: 0; visibility: hidden; transition: all 0.3s ease; z-index: 10000; display: flex; align-items: center; gap: 10px; backdrop-filter: blur(10px); }
         #custom-toast.show { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
         #custom-toast i { color: var(--primary); }
 
-        /* FOOTER */
         footer { background: linear-gradient(180deg, rgba(5, 7, 14, 0) 0%, rgba(13, 19, 33, 0.9) 100%); border-top: 1px solid var(--border-glass); text-align: center; padding: 50px 20px 30px; width: 100%; }
         .cta-container { max-width: 700px; margin: 0 auto; padding: 35px 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.4); border-radius: 20px; }
         .cta-title { font-family: 'Poppins', sans-serif; font-size: clamp(1.4rem, 2.5vw, 1.8rem); font-weight: 700; margin-bottom: 12px; background: var(--gradient-main); -webkit-background-clip: text; -webkit-text-fill-color: transparent; position: relative; z-index: 2;}
@@ -255,7 +236,6 @@
         .cta-buttons { display: flex; justify-content: center; gap: 12px; flex-wrap: nowrap; position: relative; z-index: 2;}
         .footer-copyright { margin-top: 25px; color: var(--text-muted); font-size: 0.85rem; position: relative; z-index: 2;}
 
-        /* RESPONSIVE */
         @media (max-width: 768px) {
             .profile-img-wrapper { width: 220px; height: 220px; }
             .ring-hud { width: 220px; height: 220px; }
@@ -382,7 +362,7 @@
                     <div class="stat-icon" style="position: relative; z-index: 2;"><i class="fas fa-graduation-cap"></i></div>
                     <div class="stat-info" style="position: relative; z-index: 2;">
                         <h4>शिक्षा लक्ष्य</h4>
-                        <p>CAT, CUET PG & LLB Aspirant</p>
+                        <p>CAT, CUET PG & Law Student / LLB</p>
                     </div>
                 </div>
                 <div class="stat-card animated-border-box hover-effect" style="border-radius: 16px;">
@@ -413,7 +393,7 @@
 
                     <p>एक मिडिल क्लास लड़के की ज़िंदगी का सबसे कड़वा सच यही है कि अगर जेब में पैसा न हो, तो अपने ही घर में सम्मान नहीं मिलता। समाज आपकी अहमियत आपकी <span class="highlight-cyan">हैसियत</span> से तय करता है। आप कितनी भी पढ़ाई कर लें, लेकिन अगर एक अच्छी नौकरी का ठप्पा न लगे, तो दुनिया आपको नाकामयाब ही मानती है। संघर्ष के दिनों में इंसान अपनों और रिश्तेदारों से सहारे की आस लगाता है, लेकिन हकीकत में उस अँधेरे सफर में कोई साथ नहीं देता। मेरे साथ भी बिल्कुल ऐसा ही हुआ। एक वक्त था जब आँखों में बड़े सपने थे, बहुत कुछ कर गुज़रने की चाह थी, लेकिन हालातों और अपनों की बेरुखी ने कई बार ऐसा महसूस कराया मानो अब कुछ नहीं हो पाएगा। दिल टूटा, हिम्मत भी बिखरी, लेकिन मेरे अंदर की <span class="highlight-violet">उम्मीद अभी भी ज़िंदा है</span>। जिन लोगों ने मेरे बुरे वक्त में मुझे ठुकराया, जिन्होंने मेरा मज़ाक उड़ाया और मुझे सम्मान नहीं दिया, उन सबका हिसाब होगा।</p>
                     
-                    <p>यह मेरा संघर्ष है, और मैं अपनी ज़िंदगी में इतना कुछ हासिल करूँगा कि जो लोग आज मुँह फेर लेते हैं, वो कल मुझे देखने के लिए तरसेंगे। आज मेरा यही जुनून मेरी ताकत है। मैं <span class="badge-pill">तथ्यधर्मी भारत</span> में डिस्ट्रिक्ट एडिटर हूँ, <span class="badge-pill">IndianMoney.com</span> में रिलेशनशिप मैनेजर हूँ, और <span class="badge-pill badge-violet">Google Play Store ऐप पब्लिशर</span> हूँ। इसके साथ ही मैं <span class="highlight-cyan">CAT, CUET PG, और LLB</span> की तैयारी कर रहा हूँ। मेरा सफर अभी खत्म नहीं हुआ है!</p>
+                    <p>यह मेरा संघर्ष है, और मैं अपनी ज़िंदगी में इतना कुछ हासिल करूँगा कि जो लोग आज मुँह फेर लेते हैं, वो कल मुझे देखने के लिए तरसेंगे। आज मेरा यही जुनून मेरी ताकत है। मैं <span class="badge-pill">तथ्यधर्मी भारत</span> में डिस्ट्रिक्ट एडिटर हूँ, <span class="badge-pill">IndianMoney.com</span> में रिलेशनशिप मैनेजर हूँ, और <span class="badge-pill badge-violet">Google Play Store ऐप पब्लिशर</span> हूँ। इसके साथ ही मैं <span class="highlight-cyan">CAT, CUET PG, और Law Student / LLB</span> की पढ़ाई कर रहा हूँ। मेरा सफर अभी खत्म नहीं हुआ है!</p>
                 </div>
             </div>
 
@@ -513,10 +493,10 @@
                 <div class="accordion-content">
                     <div class="timeline">
                         <div class="timeline-milestone">
-                            <span class="milestone-badge">Upcoming / Aspirant</span>
-                            <h3 class="milestone-title">प्रतियोगी परीक्षा की तैयारी</h3>
-                            <div class="milestone-subtitle">CAT, CUET PG & LLB Examination</div>
-                            <p>शीर्ष प्रबंधन और कानून संस्थानों में प्रवेश के लिए समर्पित और गहन तैयारी।</p>
+                            <span class="milestone-badge">Pursuing / Aspirant</span>
+                            <h3 class="milestone-title">उच्च शिक्षा एवं विधि अध्ययन</h3>
+                            <div class="milestone-subtitle">CAT, CUET PG & Law Student / LLB</div>
+                            <p>शीर्ष प्रबंधन और कानून संस्थानों में प्रवेश एवं विधि शिक्षा (Law Student) के लिए समर्पित और गहन तैयारी।</p>
                         </div>
                         <div class="timeline-milestone">
                             <span class="milestone-badge">1st Year (Pursuing)</span>
@@ -680,7 +660,6 @@
     </div>
 
     <script>
-        // 🌌 HTML5 Interactive Quantum Canvas (Futuristic Background)
         const canvas = document.getElementById("quantumCanvas");
         const ctx = canvas.getContext("2d");
         let particles = [];
@@ -714,7 +693,6 @@
             }
         }
 
-        // Generate Particles
         for (let i = 0; i < 60; i++) particles.push(new Particle());
 
         function animateCanvas() {
@@ -722,7 +700,6 @@
             for (let i = 0; i < particles.length; i++) {
                 particles[i].update();
                 particles[i].draw();
-                // Draw connecting cyber lines
                 for (let j = i + 1; j < particles.length; j++) {
                     const dx = particles[i].x - particles[j].x;
                     const dy = particles[i].y - particles[j].y;
@@ -741,7 +718,6 @@
         }
         animateCanvas();
 
-        // ⏳ Real-Time Life Timer Logic
         function updateLifeTimer() {
             const targetDate = new Date("2050-01-01T00:00:00");
             const now = new Date();
@@ -775,13 +751,11 @@
         setInterval(updateLifeTimer, 1000);
         updateLifeTimer();
 
-        // 🔘 Toggle Depart Section
         function toggleDepartSection() {
             const content = document.getElementById('departContent');
             content.classList.toggle('show');
         }
 
-        // 🔄 Sliding Carousel for Social Cards
         let currentSlide = 0;
         const slides = document.querySelectorAll('.action-card-slide');
         function rotateSlides() {
@@ -792,7 +766,6 @@
         }
         setInterval(rotateSlides, 3000);
 
-        // 📖 Thoughts Carousel (Auto-Adjustable Height via Display: Block/None)
         let currentThought = 0;
         const thoughtSlides = document.querySelectorAll('.thought-card-slide');
         const indicatorEl = document.getElementById('thoughtIndicator');
@@ -832,7 +805,6 @@
             thoughtInterval = setInterval(autoRotateThoughts, 5000);
         }
 
-        // 🪟 Custom Content Modals
         function showCustomPopup(title, content) {
             const modal = document.getElementById('generic-popup-modal');
             const titleEl = document.getElementById('popup-modal-title');
@@ -860,7 +832,7 @@
                 <p>मेरा परिवार मेरे जीवन का सबसे खास हिस्सा है। मेरे परिवार में मेरे मम्मी-पापा, चार छोटे भाई और एक बहन हैं। मैं घर में सबसे बड़ा बेटा हूँ, इसलिए परिवार की जिम्मेदारियों को समझना और सभी का साथ देना मेरे लिए बहुत जरूरी है। ❤️ मैं अपनी B.A. की पढ़ाई पूरी कर चुका हूँ और अभी M.A. कर रहा हूँ। इसके साथ-साथ मैं नौकरी भी करता हूँ। 📚💼</p>
                 <p>मेरे चार छोटे भाइयों में से एक पढ़ाई कर रहा है, एक काम करता है और बाकी भाई खेती के काम में हाथ बँटाते हैं। 🌾 मेरे पापा खेती करते हैं और परिवार के लिए बहुत मेहनत करते हैं। 👨‍🌾 मेरी मम्मी घर का पूरा काम संभालती हैं और अपने प्यार व ममता से पूरे परिवार को जोड़े रखती हैं। ❤️ मेरी बहन भी हमारे परिवार का एक प्यारा हिस्सा है। 🌸</p>
                 <p>मेरी मौसी का परिवार भी हमारे साथ ही रहता है। उनके दो लड़के और एक लड़की हैं, जो मुझसे छोटे हैं। वे भी खेती के काम में सहयोग करते हैं। 🌱🤝 इस तरह हम सभी मिल-जुलकर रहते हैं और घर की जिम्मेदारियों को आपस में बाँटकर निभाते हैं। हमारे परिवार में हर व्यक्ति अपनी जगह महत्वपूर्ण है और सभी एक-दूसरे का साथ देते हैं। ❤️</p>
-                <p>हमारे परिवार की जिंदगी पढ़ाई, नौकरी, खेती और घर की जिम्मेदारियों से जुड़ी हुई है। कोई पढ़ाई करके अपने भविष्य को बेहतर बनाने की कोशिश कर रहा है, कोई नौकरी कर रहा है और कोई खेती के काम में परिवार का साथ दे رہا है। 📚💼🌾 यही मिल-जुलकर रहने और एक-दूसरे की मदद करने की भावना हमारे परिवार को खास बनाती है。</p>
+                <p>हमारे परिवार की जिंदगी पढ़ाई, नौकरी, खेती और घर की जिम्मेदारियों से जुड़ी हुई है। कोई पढ़ाई करके अपने भविष्य को बेहतर बनाने की कोशिश कर रहा है, कोई नौकरी कर रहा है और कोई खेती के काम में परिवार का साथ दे रहा है। 📚💼🌾 यही मिल-जुलकर रहने और एक-दूसरे की मदद करने की भावना हमारे परिवार को खास बनाती है。</p>
                 <p>मेरे लिए मेरा परिवार सिर्फ मेरे साथ रहने वाले लोग नहीं हैं, बल्कि मेरी ताकत, मेरी प्रेरणा और मेरी खुशी हैं। ❤️ मेरे माता-पिता ने हमेशा हमारे बेहतर भविष्य के लिए मेहनत की है। मैं भी चाहता हूँ कि अपनी पढ़ाई, नौकरी और मेहनत के दम पर आगे बढ़ूँ और अपने परिवार का नाम रोशन करूँ। 🎯✨</p>
             `;
             showCustomPopup("🏡 मेरा परिवार ❤️", content);
@@ -883,8 +855,7 @@
             showCustomPopup("🎯 सपने", content);
         }
 
-        // 🔄 Role Switcher
-        const roles = [ "रिलेशनशिप मैनेजर", "डिस्ट्रिक्ट एडिटर & संवाददाता", "Google Play Store ऐप पब्लिशर & डेवलपर" ];
+        const roles = [ "रिलेशनशिप मैनेजर", "डिस्ट्रिक्ट एडिटर & संवाददाता", "Law Student & LLB Aspirant" ];
         let currentRoleIndex = 0;
         function rotateRoles() {
             const roleElement = document.getElementById("rotating-role");
@@ -905,7 +876,6 @@
 
         function closeGenericPopup() { document.getElementById('generic-popup-modal').classList.remove('show'); }
 
-        // 🗂️ Accordion Logic
         function toggleAccordion(headerElement) {
             const currentCard = headerElement.parentElement;
             const isActive = currentCard.classList.contains('active');
